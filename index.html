@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Odliczanie do 18 sierpnia 2026, 15:00</title>
+  <meta name="description" content="Nowoczesny licznik czasu odliczający do 18.08.2026 godz. 15:00." />
+
+  <!-- Google Fonts: Plus Jakarta Sans & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⏳</text></svg>" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Tło z subtelnym oświetleniem -->
+  <div class="ambient-background">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+  </div>
+
+  <main class="countdown-card" id="main-card">
+    <header class="header-section">
+      <div class="event-badge">
+        <span class="pulse-indicator"></span>
+        <span>Nadgodziny</span>
+      </div>
+      <h1 class="main-title">Czy wypłacą nadgodziny do</h1>
+      <p class="target-date-label">
+        <time datetime="2026-08-18T15:00:00+02:00">18 sierpnia 2026 • 15:00 ?</time>
+      </p>
+    </header>
+
+    <!-- Siatka jednostek czasu -->
+    <section class="timer-grid" id="timer-grid" aria-live="polite">
+      <!-- Dni -->
+      <div class="time-block">
+        <div class="time-value-card">
+          <span class="number" id="days">--</span>
+        </div>
+        <span class="time-label" id="days-label">Dni</span>
+      </div>
+
+      <div class="time-separator" aria-hidden="true">:</div>
+
+      <!-- Godziny -->
+      <div class="time-block">
+        <div class="time-value-card">
+          <span class="number" id="hours">--</span>
+        </div>
+        <span class="time-label" id="hours-label">Godzin</span>
+      </div>
+
+      <div class="time-separator" aria-hidden="true">:</div>
+
+      <!-- Minuty -->
+      <div class="time-block">
+        <div class="time-value-card">
+          <span class="number" id="minutes">--</span>
+        </div>
+        <span class="time-label" id="minutes-label">Minut</span>
+      </div>
+
+      <div class="time-separator" aria-hidden="true">:</div>
+
+      <!-- Sekundy -->
+      <div class="time-block">
+        <div class="time-value-card highlight-card">
+          <span class="number" id="seconds">--</span>
+        </div>
+        <span class="time-label" id="seconds-label">Sekund</span>
+      </div>
+    </section>
+
+    <!-- Komunikat po zakończeniu odliczania -->
+    <div class="finished-container hidden" id="finished-container">
+      <div class="finished-icon">🎉</div>
+      <h2 class="finished-title">Czas minął!</h2>
+      <p class="finished-subtitle">Wydarzenie właśnie się rozpoczęło.</p>
+    </div>
+
+    <!-- Pasek postępu -->
+    <div class="progress-section" id="progress-wrapper">
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progress-fill" style="width: 0%"></div>
+      </div>
+      <div class="progress-info">
+        <span id="progress-text">Przygotowywanie...</span>
+        <span id="progress-percent">0%</span>
+      </div>
+    </div>
+
+    <!-- Stopka -->
+    <footer class="card-footer">
+      <p class="timezone-note">Strefa czasowa: Europa / Warszawa (CEST, UTC+2)</p>
+    </footer>
+  </main>
+
+  <!-- Skrypt Canvas Confetti do efektu zakończenia -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

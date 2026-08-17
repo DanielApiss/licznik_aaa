@@ -1,0 +1,422 @@
+/* ==========================================================================
+   Design System & Tokens
+   ========================================================================== */
+:root {
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Space Grotesk', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Kolorystyka - nowoczesna, głęboka paleta neutralna z wyrazistymi akcentami */
+  --bg-color: #0c0e14;
+  --surface-card: rgba(22, 27, 38, 0.75);
+  --surface-card-border: rgba(255, 255, 255, 0.08);
+  --surface-block: rgba(30, 36, 51, 0.7);
+  --surface-block-border: rgba(255, 255, 255, 0.06);
+
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --accent-primary: #38bdf8;       /* Błękit lodowy */
+  --accent-secondary: #0ea5e9;
+  --accent-highlight: #f59e0b;     /* Ciepły bursztyn dla sekund */
+  --accent-badge-bg: rgba(56, 189, 248, 0.12);
+  --accent-badge-border: rgba(56, 189, 248, 0.25);
+  --accent-badge-text: #7dd3fc;
+
+  --card-radius: 36px;
+  --block-radius: 24px;
+  --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow-main: 0 30px 70px -15px rgba(0, 0, 0, 0.7), 0 0 1px 1px rgba(255, 255, 255, 0.06);
+}
+
+/* ==========================================================================
+   Reset & Base Styles
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  min-height: 100vh;
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   Ambient Background Glow
+   ========================================================================== */
+.ambient-background {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.35;
+  will-change: transform;
+}
+
+.orb-1 {
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, #0284c7 0%, rgba(2, 132, 199, 0) 70%);
+  top: -150px;
+  right: -100px;
+  animation: floatOrb 18s ease-in-out infinite alternate;
+}
+
+.orb-2 {
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, #1e3a8a 0%, rgba(30, 58, 138, 0) 70%);
+  bottom: -180px;
+  left: -120px;
+  animation: floatOrb 22s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes floatOrb {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(40px, 30px) scale(1.08);
+  }
+}
+
+/* ==========================================================================
+   Main Card Container (Powiększone o 60%)
+   ========================================================================== */
+.countdown-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1250px;
+  margin: 2rem;
+  padding: 4.5rem 3.75rem;
+  background: var(--surface-card);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid var(--surface-card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-main);
+  text-align: center;
+  transition: var(--transition-smooth);
+}
+
+/* ==========================================================================
+   Header Section
+   ========================================================================== */
+.header-section {
+  margin-bottom: 3.75rem;
+}
+
+.event-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 1.35rem;
+  background: var(--accent-badge-bg);
+  border: 1px solid var(--accent-badge-border);
+  border-radius: 9999px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-badge-text);
+  margin-bottom: 1.75rem;
+}
+
+.pulse-indicator {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: var(--accent-primary);
+  box-shadow: 0 0 12px var(--accent-primary);
+  animation: pulseDot 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+}
+
+.main-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: var(--text-primary);
+  margin-bottom: 0.9rem;
+  line-height: 1.15;
+}
+
+.target-date-label {
+  font-size: 1.55rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.target-date-label time {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Timer Grid (Powiększone kafelki)
+   ========================================================================== */
+.timer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3.5rem;
+}
+
+.time-separator {
+  display: none;
+}
+
+.time-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.time-value-card {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-block);
+  border: 1px solid var(--surface-block-border);
+  border-radius: var(--block-radius);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.09), 0 12px 28px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.time-value-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.12), 0 16px 36px rgba(0, 0, 0, 0.45);
+}
+
+.highlight-card {
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.time-value-card .number {
+  font-family: var(--font-mono);
+  font-size: 5.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+}
+
+.highlight-card .number {
+  color: var(--accent-primary);
+}
+
+.time-label {
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   Progress Section (Powiększony pasek)
+   ========================================================================== */
+.progress-section {
+  background: rgba(15, 20, 30, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 18px;
+  padding: 1.75rem 2.25rem;
+  margin-bottom: 2.75rem;
+}
+
+.progress-bar-track {
+  width: 100%;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0284c7, var(--accent-primary));
+  border-radius: 9999px;
+  transition: width 0.4s ease;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+#progress-percent {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   Finished State
+   ========================================================================== */
+.finished-container {
+  padding: 3.5rem 1rem;
+  animation: fadeInScale 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.finished-container.hidden {
+  display: none;
+}
+
+.finished-icon {
+  font-size: 5.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.finished-title {
+  font-size: 3.8rem;
+  font-weight: 700;
+  color: #38bdf8;
+  margin-bottom: 0.75rem;
+}
+
+.finished-subtitle {
+  font-size: 1.75rem;
+  color: var(--text-secondary);
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.card-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 2rem;
+}
+
+.timezone-note {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .countdown-card {
+    padding: 3.5rem 2.5rem;
+  }
+
+  .main-title {
+    font-size: 2.75rem;
+  }
+
+  .time-value-card .number {
+    font-size: 4rem;
+  }
+
+  .timer-grid {
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .countdown-card {
+    padding: 2.5rem 1.5rem;
+    margin: 1.25rem;
+    border-radius: 24px;
+  }
+
+  .main-title {
+    font-size: 2.2rem;
+  }
+
+  .target-date-label {
+    font-size: 1.15rem;
+  }
+
+  .timer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .time-value-card {
+    max-width: 100%;
+    aspect-ratio: auto;
+    padding: 1.5rem 0.5rem;
+    border-radius: 18px;
+  }
+
+  .time-value-card .number {
+    font-size: 3.25rem;
+  }
+
+  .time-label {
+    font-size: 0.95rem;
+  }
+
+  .progress-info {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .main-title {
+    font-size: 1.75rem;
+  }
+
+  .time-value-card .number {
+    font-size: 2.4rem;
+  }
+}
